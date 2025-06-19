@@ -11,12 +11,11 @@ function prompt {
 	fi
 }
 
-function install {
+function install_all {
 	echo 'Updating the system'
 	sudo pacman -Syu
-	echo 'Installing git and base-devel'
-	sudo pacman -S git base-devel
 	install_yay
+	install_and_setup_hyprland 
 }
 
 function install_yay {
@@ -42,6 +41,11 @@ function install_yay {
 	fi
 }
 
+function install_and_setup_hyprland {
+	echo "Installing Hyprland with uwsm"
+	sudo pacman -S --needed hyprland uwsm libnewt --noconfirm
+}
+
 
 echo 'Welcome to reshrice installer!'
-prompt 'Shall we start the installation process?' install
+prompt 'Shall we start the installation process?' install_all
